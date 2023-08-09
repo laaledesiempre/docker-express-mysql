@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mysqldatabase:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD= "testin"
+      - MYSQL_DATABASE= "test"
+    networks:
+      databases:
+        ipv4_address: 192.168.69.10
+    volumes:
+      - testdatabase:/var/lib/mysql
+networks:
+  databases:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.69.0/24"
