@@ -4,9 +4,11 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" Component={/**/}/>
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" Component={/**/}/>
+        </Routes>
+      </main>
     </BrowserRouter>
   )
 }
