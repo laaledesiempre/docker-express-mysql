@@ -1,7 +1,9 @@
-import React from 'react'
-
+import { ApiForm } from "../components/ApiForm"
 export const Mainpage = () => {
-  return (
-    <div>Mainpage</div>
+  return (<>
+    <ApiForm config={{ ApiUrl: "", method: "GET", name: true, age: true, description: true }} />
+    <ApiForm config={{ ApiUrl: "", method: "GET", name: false, age: true, description: true }} />
+    <ApiForm config={{ ApiUrl: "", method: "GET", name: true, age: false, description: false }} />
+  </>
   )
 }

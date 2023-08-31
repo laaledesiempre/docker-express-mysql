@@ -1,26 +1,26 @@
+import './ApiForm.css'
 import { ChangeEvent, FormEvent, useState } from "react"
-import { FormProp } from "../types/types"
 import axios from "axios"
 
-export const ApiForm = (props: FormProp = {
+export const ApiForm = ({ config = {
   ApiUrl: "example.com",
   method: "GET",
   name: false,
   age: false,
   description: false
-}) => {
+} }) => {
 
   const [name, setName] = useState("")
   const [age, setAge] = useState(0)
   const [description, setDescription] = useState("")
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault
+    e.preventDefault()
 
     // Get request
 
-    if (props.method == "GET") {
-      axios.get(props.ApiUrl).then(
+    if (config.method == "GET") {
+      axios.get(config.ApiUrl).then(
         (response) => {
           console.log(response)
           //todo
@@ -29,8 +29,8 @@ export const ApiForm = (props: FormProp = {
 
       // Post request
 
-    } else if (props.method == "POST") {
-      axios.post(props.ApiUrl, { name, age, description }).then(
+    } else if (config.method == "POST") {
+      axios.post(config.ApiUrl, { name, age, description }).then(
         (response) => {
           console.log(response)
           //todo
@@ -39,8 +39,8 @@ export const ApiForm = (props: FormProp = {
 
       // Update request
 
-    } else if (props.method == "UPDATE") {
-      axios.put(props.ApiUrl, { name, age, description }).then(
+    } else if (config.method == "UPDATE") {
+      axios.put(config.ApiUrl, { name, age, description }).then(
         (response) => {
           console.log(response)
           //todo
@@ -49,8 +49,8 @@ export const ApiForm = (props: FormProp = {
 
       // Delete request
 
-    } else if (props.method == "DELETE") {
-      axios.delete(props.ApiUrl, { headers: {}, data: { name } }).then(
+    } else if (config.method == "DELETE") {
+      axios.delete(config.ApiUrl, { headers: {}, data: { name } }).then(
         (response) => {
           console.log(response)
           //todo
@@ -63,13 +63,16 @@ export const ApiForm = (props: FormProp = {
     const target = e.target as HTMLInputElement
     func(target.value)
   }
-
+  const number = Math.floor(Math.random() * 20)
   return (
 
-    <form onSubmit={(e) => handleSubmit(e)}>
-      {props.name && <input required onChange={(e) => changeHandler(e, setName)}></input>}
-      {props.age && <input type="number" required onChange={(e) => changeHandler(e, setAge)}></input>}
-      {props.description && <input required onChange={(e) => changeHandler(e, setDescription)}></input>}
+    <form className="api-form" onSubmit={(e) => handleSubmit(e)}>
+      {config.name && <label htmlFor={"name" + number}>Nombre</label>}
+      {config.name && <input id={"name" + number} required onChange={(e) => changeHandler(e, setName)} />}
+      {config.age && <label htmlFor={"age" + number}>Edad</label>}
+      {config.age && <input id={"age" + number} type="number" required onChange={(e) => changeHandler(e, setAge)} />}
+      {config.description && <label htmlFor={"description" + number}>Descripción</label>}
+      {config.description && <textarea id={"description" + number} required onChange={(e) => changeHandler(e, setDescription)} />}
       <button type="submit">Enviar</button>
     </form>
 
