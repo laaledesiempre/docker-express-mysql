@@ -79,7 +79,7 @@ app.put("/api/character", (req,res)=>{
 
 // Getting Single Character Data Endpoint
 
-app.get("/api/character/:id",(req,res)=>{
+app.get("/api/character/id/:id",(req,res)=>{
 
   const {id}= requestr.params
 
