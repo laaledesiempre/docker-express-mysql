@@ -1,0 +1,9 @@
+.character-page-container{
+  display: flex;
+  margin: auto;
+  background-color: red;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem
+}

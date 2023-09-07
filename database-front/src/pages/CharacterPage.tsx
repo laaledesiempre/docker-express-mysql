@@ -1,12 +1,12 @@
-import React from 'react'
 import { useParams } from 'react-router-dom'
-export const CharacterPage = () => { 
-  param = useParams()
+import "./characterpage.css"
+export const CharacterPage = () => {
+  const param = useParams()
   return (
-    <>
-      <h1>{param.character.name}</h1>
-      <p>{param.character.name}</p>
-      <p>{param.character.description}</p>
-    </>
+    <div className='character-page-container'>
+      <h1>{param.character}</h1>
+      <p>{param.character}</p>
+      <p>{param.character}</p>
+    </div>
   )
 }

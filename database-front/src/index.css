@@ -2,6 +2,8 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
+  color:var(--white-cream);
+  font-family: "roboto mono";
 }
 
 :root {
@@ -12,4 +14,23 @@
   --white-cream: #F4E9CD;  
 }
 
+label {
+  font-size: 1.5rem;
+}
 
+body{
+  background-color: var(--dark-black) !important;
+}
+input, textarea {
+  background-color: var(--greenish);
+  color: var(--dark-black);
+}
+
+button{
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  border: none;
+  background-color: var(--blueish);
+  color: var(--white-cream);
+}
