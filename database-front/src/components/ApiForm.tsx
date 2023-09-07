@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import axios from "axios"
 
 export const ApiForm = ({ config = {
+  id: true,
   ApiUrl: "example.com",
   method: "GET",
   name: false,
@@ -10,14 +11,19 @@ export const ApiForm = ({ config = {
   description: false
 } }) => {
 
+  //States
+
+  const [id, setID] = useState(0)
   const [name, setName] = useState("")
   const [age, setAge] = useState(0)
   const [description, setDescription] = useState("")
 
+  // Request handlers
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
-    // Get request
+    // Get request (TODO)
 
     if (config.method == "GET") {
       axios.get(config.ApiUrl).then(
@@ -27,20 +33,20 @@ export const ApiForm = ({ config = {
         }, (error) => alert(error)
       )
 
-      // Post request
+      // Post request (For testing)
 
     } else if (config.method == "POST") {
       axios.post(config.ApiUrl, { name, age, description }).then(
         (response) => {
           console.log(response)
-          //todo
+          alert("Added successfully")
         }, (error) => alert(error)
       )
 
       // Update request
 
     } else if (config.method == "UPDATE") {
-      axios.put(config.ApiUrl, { name, age, description }).then(
+      axios.put(config.ApiUrl, { id, name, age, description }).then(
         (response) => {
           console.log(response)
           //todo
@@ -59,21 +65,37 @@ export const ApiForm = ({ config = {
     }
   }
 
+  // Change Handler
+
   const changeHandler = (e: ChangeEvent, func: Function) => {
     const target = e.target as HTMLInputElement
     func(target.value)
   }
-  const number = Math.floor(Math.random() * 20)
+  
+  // Form Return
   return (
 
     <form className="api-form" onSubmit={(e) => handleSubmit(e)}>
-      {config.name && <label htmlFor={"name" + number}>Nombre</label>}
-      {config.name && <input id={"name" + number} required onChange={(e) => changeHandler(e, setName)} />}
-      {config.age && <label htmlFor={"age" + number}>Edad</label>}
-      {config.age && <input id={"age" + number} type="number" required onChange={(e) => changeHandler(e, setAge)} />}
-      {config.description && <label htmlFor={"description" + number}>Descripción</label>}
-      {config.description && <textarea id={"description" + number} required onChange={(e) => changeHandler(e, setDescription)} />}
+
+      {/*ID*/}
+      {config.name && <label htmlFor={"id"}>id</label>}
+      {config.name && <input id={"id"} required onChange={(e) => changeHandler(e, setID)} />}
+
+      {/*Name*/}
+      {config.name && <label htmlFor={"name"}>Nombre</label>}
+      {config.name && <input id={"name"} required onChange={(e) => changeHandler(e, setName)} />}
+
+      {/*Age*/}
+      {config.age && <label htmlFor={"age"}>Edad</label>}
+      {config.age && <input id={"age"} type="number" required onChange={(e) => changeHandler(e, setAge)} />}
+
+      {/*Description*/}
+      {config.description && <label htmlFor={"description"}>Descripción</label>}
+      {config.description && <textarea id={"description"} required onChange={(e) => changeHandler(e, setDescription)} />}
+      
+      {/*Submit*/}
       <button type="submit">Enviar</button>
+
     </form>
 
   )

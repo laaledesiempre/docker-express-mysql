@@ -10,9 +10,9 @@ export const App = () => {
       <main>
         <Routes>
           <Route path="/" element={<Mainpage />} />
-          <Route path="/create" element={<ApiForm config={{ ApiUrl: "", method: "GET", name: true, age: true, description: true }} />} />
-          <Route path="/delete" element={<ApiForm config={{ ApiUrl: "", method: "GET", name: true, age: false, description: false }} />} />
-          <Route path="/update" element={<ApiForm config={{ ApiUrl: "", method: "GET", name: true, age: true, description: true }} />} />
+          <Route path="/create" element={<ApiForm config={{ ApiUrl: "", method: "GET", id: false , name: true, age: true, description: true }} />} />
+          <Route path="/delete" element={<ApiForm config={{ ApiUrl: "", method: "GET", id: true , name: false, age: false, description: false }} />} />
+          <Route path="/update" element={<ApiForm config={{ ApiUrl: "", method: "GET", id: true ,name: true, age: true, description: true }} />} />
           <Route path="/read" element={<Database />} />
           <Route path="/character/:character" element={<CharacterPage />} />
         </Routes>
