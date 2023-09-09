@@ -6,7 +6,7 @@ export const Database = () => {
   const [data, setData] = useState([])
   
   // Characters request
-  axios.get("todo/api/characters").then(
+  axios.get("http://192.168.69.11/api/characters").then(
     (response)=>{
       setData(response.data)
     },

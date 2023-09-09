@@ -77,6 +77,14 @@ app.put("/api/character", (req,res)=>{
   )
 })
 
+// Delete Character Endpoint
+app.delete("/api/character",(req,res)=>{
+  db.query(
+    'delete * from characters where id=?',[id],
+    defaultResponseDatabase(err,result)
+  )
+})
+
 // Getting Single Character Data Endpoint
 
 app.get("/api/character/id/:id",(req,res)=>{

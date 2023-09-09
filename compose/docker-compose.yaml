@@ -11,6 +11,16 @@ services:
         ipv4_address: 192.168.69.10
     volumes:
       - testdatabase:/var/lib/mysql
+  nodejsbackend:
+    image: laaledesiempre/docker-express-mysql/express
+    networks:
+      databases:
+        ipv4_address: 192.168.69.11
+  reactfrontend:
+    image: laaledesiempre/docker-express-mysql/react
+    networks:
+      databases:
+        ipv4_address: 192.168.69.12
 networks:
   databases:
     ipam:

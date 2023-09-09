@@ -56,7 +56,7 @@ export const ApiForm = ({ config = {
       // Delete request
 
     } else if (config.method == "DELETE") {
-      axios.delete(config.ApiUrl, { headers: {}, data: { name } }).then(
+      axios.delete(config.ApiUrl, { headers: {}, data: { id } }).then(
         (response) => {
           console.log(response)
           //todo

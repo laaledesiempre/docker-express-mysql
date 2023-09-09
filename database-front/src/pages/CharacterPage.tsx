@@ -15,7 +15,7 @@ export const CharacterPage = () => {
   const param = useParams()
 
   // Get character request
-  axios.get('todo/characters/id/'+param.character).then(
+  axios.get('http://192.168.69.11/characters/id/'+param.character).then(
     (response) => {
       setData(response.data)
     }, (error) => {
