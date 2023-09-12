@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-import {Express, Response, Request} from 'express'
-const bodyParser = require('body-parser') //TODO
-const mysql = require('mysql') //TODO
-const cors = require('cors') //TODO
-=======
 import express, { Response, Request } from 'express'
 import mysql, { MysqlError } from 'mysql'
->>>>>>> 7b43dcc (types and dependencies checked on express server)
 
 // Constants
 
@@ -85,10 +78,10 @@ app.put("/api/character", (req, res) => {
 })
 
 // Delete Character Endpoint
-app.delete("/api/character",(req,res)=>{
+app.delete("/api/character", (req, res) => {
   db.query(
-    'delete * from characters where id=?',[id],
-    defaultResponseDatabase(err,result)
+    'delete * from characters where id=?', [id],
+    defaultResponseDatabase(err, result)
   )
 })
 
