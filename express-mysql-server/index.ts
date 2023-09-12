@@ -79,9 +79,10 @@ app.put("/api/character", (req, res) => {
 
 // Delete Character Endpoint
 app.delete("/api/character", (req, res) => {
+  const { id } = req.body
   db.query(
     'delete * from characters where id=?', [id],
-    defaultResponseDatabase(err, result)
+    (err, result) => defaultResponseDatabase(err, result, res)
   )
 })
 
