@@ -1,10 +1,11 @@
 import express, { Response, Request } from 'express'
 import mysql, { MysqlError } from 'mysql'
-
+import cors from 'cors'
 // Constants
 
 const app = express()
 const PORT = 3000
+app.use(cors())
 
 // Data Base Conection
 
