@@ -8,7 +8,8 @@ var cors = require("cors")
 var app = express();
 var PORT = 3000;
 app.use(cors({
-  origin: true
+  origin: "*",
+  methods: ["GET","PUT","POST","DELETE"]
 }))
 // Data Base Conection
 
