@@ -1,13 +1,14 @@
-import express, { Response, Request } from 'express'
-import mysql, { MysqlError } from 'mysql'
-import cors from 'cors'
+const express = require("express")
+const mysql = require("mysql2/promise")
+const cors = require("cors")
 // Constants
 
 const app = express()
 const PORT = 3000
+let created = false
 app.use(cors({
   origin: "*",
-  methods: ["GET","PUT","POST","DELETE"]
+  methods: ["GET", "PUT", "POST", "DELETE"]
 }))
 
 // Data Base Conection
@@ -16,13 +17,13 @@ const db = mysql.createPool({
   host: "192.168.69.10",
   user: "root",
   password: "test",
-  database: "test"
+  database: "db"
 })
 
 //------------------
 // Functions
 
-const defaultResponseDatabase = (err: MysqlError | null, result: any, res: Response) => {
+const defaultResponseDatabase = (err: any, result: any, res: Response) => {
 
   if (err) {
     res.sendStatus(500)
@@ -38,17 +39,20 @@ const defaultResponseDatabase = (err: MysqlError | null, result: any, res: Respo
 
 // Database constructor
 
-(() => {
-  db.query(
-    'CREATE TABLE characters (id int not null auto_increment,name VARCHAR(50),age INT, description VARCHAR(255), primary key (id))',
-    (err, _result) => {
-      if (err) { console.log(err) }
-    })
-})()
-
 //------------------
 //Endpoints
-
+app.get("/", (req, res) => {
+  if (!created) {
+    async () => {
+      await db.query(
+        'CREATE TABLE characters (id int not null auto_increment,name VARCHAR(50),age INT, description VARCHAR(255), primary key (id))',
+        (err, _result) => {
+          if (err) { console.log(err) }
+        })
+      created = true
+    }
+  }
+})
 app.get("/test", (_req, res) => {
 
   res.send("Hi from here")
@@ -57,11 +61,11 @@ app.get("/test", (_req, res) => {
 
 // Adding Characters Endpoint
 
-app.post("/api/character", (req: Request, res: Response) => {
+app.post("/api/character", async (req: Request, res: Response) => {
 
   const { name, age, description } = req.body
 
-  db.query(
+  await db.query(
     'INSERT INTO characters (name, age, description) values (? , ? , ?)',
     [name, age, description],
     (err, result) => defaultResponseDatabase(err, result, res)
@@ -70,11 +74,11 @@ app.post("/api/character", (req: Request, res: Response) => {
 
 // Updating Characters Endpoint
 
-app.put("/api/character", (req, res) => {
+app.put("/api/character", async (req, res) => {
 
   const { id, name, age, description } = req.body
 
-  db.query(
+  await db.query(
     'UPDATE characters SET name = ?, age = ?, description = ? WHERE id = ?',
     [name, age, description, id],
     (err, result) => defaultResponseDatabase(err, result, res)
@@ -82,9 +86,9 @@ app.put("/api/character", (req, res) => {
 })
 
 // Delete Character Endpoint
-app.delete("/api/character", (req, res) => {
+app.delete("/api/character", async (req, res) => {
   const { id } = req.body
-  db.query(
+  await db.query(
     'delete * from characters where id=?', [id],
     (err, result) => defaultResponseDatabase(err, result, res)
   )
@@ -92,11 +96,11 @@ app.delete("/api/character", (req, res) => {
 
 // Getting Single Character Data Endpoint
 
-app.get("/api/character/id/:id", (req, res) => {
+app.get("/api/character/id/:id", async (req, res) => {
 
   const { id } = req.params
 
-  db.query(
+  await db.query(
     'select * from characters where id=?',
     [id], (err, result) => {
 
@@ -111,8 +115,8 @@ app.get("/api/character/id/:id", (req, res) => {
 
 // Get All
 
-app.get("/api/characters", (_req, res) => {
-  db.query(
+app.get("/api/characters", async (_req, res) => {
+  await db.query(
     'select * from characters',
     (err, result) => {
 

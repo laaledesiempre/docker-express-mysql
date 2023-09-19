@@ -36,7 +36,7 @@ export const ApiForm = ({ config = {
       // Post request (For testing)
 
     } else if (config.method == "POST") {
-      axios.post(config.ApiUrl, { name, age, description }).then(
+      axios.post(config.ApiUrl, { name: name, age: age, description: description }).then(
         (response) => {
           console.log(response)
           alert("Added successfully")
@@ -71,7 +71,7 @@ export const ApiForm = ({ config = {
     const target = e.target as HTMLInputElement
     func(target.value)
   }
-  
+
   // Form Return
   return (
 
@@ -92,7 +92,7 @@ export const ApiForm = ({ config = {
       {/*Description*/}
       {config.description && <label htmlFor={"description"}>Descripción</label>}
       {config.description && <textarea id={"description"} required onChange={(e) => changeHandler(e, setDescription)} />}
-      
+
       {/*Submit*/}
       <button type="submit">Enviar</button>
 
