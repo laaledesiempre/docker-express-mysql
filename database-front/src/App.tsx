@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import { Database, ApiForm, CharacterPage } from './pages/index.js'
 import { Mainpage } from './pages/Mainpage.js'
@@ -9,6 +9,12 @@ export const App = () => {
   axios.get('http://192.168.69.11:3000').then((response) => { console.log(response) }, (error) => { console.log(error) })
   return (
     <BrowserRouter>
+    <header>
+       <Link to="/create">Create</Link>
+       <Link to="/delete">delete</Link>
+       <Link to="/update">update</Link>
+       <Link to="/read">read</Link>
+    </header>
       <main>
         <Routes>
           <Route path="/" element={<Mainpage />} />

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 export const Database = () => {
 
   //States
@@ -21,8 +21,10 @@ export const Database = () => {
       {
         data.map(e => {
           return <>
-            <p>{e.name + " " + e.age + " " + e.description}</p>
-          </>
+                  <Link to={"/character/"+e.id}>
+                    <p>{e.name + " " + e.age + " " + e.description}</p>
+                  </Link>          
+                </>
         })
       }
     </div>
