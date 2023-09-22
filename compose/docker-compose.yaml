@@ -15,19 +15,26 @@ services:
       databases:
         ipv4_address: 192.168.69.10
   nodejsbackend:
-    image: laaledesiempre/docker-express-mysql/express
+    build: ../express-mysql-server/
     depends_on:
       - mysqldatabase
     networks:
       databases:
         ipv4_address: 192.168.69.11
   reactfrontend:
-    image: laaledesiempre/docker-express-mysql/react
+    build: ../database-front/ 
     ports:
       - "5173:5173"
     networks:
       databases:
         ipv4_address: 192.168.69.12
+  nginxproxy:
+    build: ../nginx_server/
+    ports:
+      - "3000:3000"
+    networks:
+      databases:
+        ipv4_address: 192.168.69.15
 networks:
   databases:
     ipam:

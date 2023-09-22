@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import "./characterpage.css"
 import axios from 'axios'
@@ -15,13 +15,16 @@ export const CharacterPage = () => {
   const param = useParams()
 
   // Get character request
-  axios.get('http://192.168.69.11:3000/characters/id/' + param.character).then(
-    (response) => {
-      setData(response.data)
-    }, (error) => {
-      alert(error)
-    }
-  )
+  useEffect(() => {
+    axios.get('http://192.168.69.11:3000/api/character/id/' + param.character).then(
+      (response) => {
+        setData(response.data[0][0])
+      }, (error) => {
+        alert(error)
+      }
+    )
+  }, [])
+
 
   return (
     <div className='character-page-container'>

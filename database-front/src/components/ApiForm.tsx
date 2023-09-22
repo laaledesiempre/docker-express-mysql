@@ -78,8 +78,8 @@ export const ApiForm = ({ config = {
     <form className="api-form" onSubmit={(e) => handleSubmit(e)}>
 
       {/*ID*/}
-      {config.name && <label htmlFor={"id"}>id</label>}
-      {config.name && <input id={"id"} required onChange={(e) => changeHandler(e, setID)} />}
+      {config.id && <label htmlFor={"id"}>id</label>}
+      {config.id && <input id={"id"} required onChange={(e) => changeHandler(e, setID)} />}
 
       {/*Name*/}
       {config.name && <label htmlFor={"name"}>Nombre</label>}

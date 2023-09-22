@@ -9,12 +9,12 @@ export const App = () => {
   axios.get('http://192.168.69.11:3000').then((response) => { console.log(response) }, (error) => { console.log(error) })
   return (
     <BrowserRouter>
-    <header>
-       <Link to="/create">Create</Link>
-       <Link to="/delete">delete</Link>
-       <Link to="/update">update</Link>
-       <Link to="/read">read</Link>
-    </header>
+      <header>
+        <Link to="/create">Create</Link>
+        <Link to="/delete">delete</Link>
+        <Link to="/update">update</Link>
+        <Link to="/read">read</Link>
+      </header>
       <main>
         <Routes>
           <Route path="/" element={<Mainpage />} />

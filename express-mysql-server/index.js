@@ -42,11 +42,11 @@ const defaultResponseDatabase = (err, result, res) => {
 
 //------------------
 //Endpoints
-app.get("/", async (req, res) => {
+app.get("/", (req, res) => {
   console.log("flag 1, endpoint impacted on base")
   if (!created) {
     console.log("flag 2, entered query");
-    await db.query(
+    db.query(
       'CREATE TABLE characters (id int not null auto_increment,name VARCHAR(50),age INT, description VARCHAR(255), primary key (id))')
       .then((response) => console.log(response))
       .catch(error => console.log(error))
@@ -90,44 +90,31 @@ app.put("/api/character", async (req, res) => {
 app.delete("/api/character", async (req, res) => {
   const { id } = req.body
   await db.query(
-    'delete * from characters where id=?', [id],
+    'delete from characters where id=?', [parseInt(id)],
     (err, result) => defaultResponseDatabase(err, result, res)
   )
 })
 
 // Getting Single Character Data Endpoint
 
-app.get("/api/character/id/:id", async (req, res) => {
+app.get("/api/character/id/:id", (req, res) => {
 
   const { id } = req.params
 
-  await db.query(
+  db.query(
     'select * from characters where id=?',
-    [id], (err, result) => {
-
-      if (err) {
-        console.log(err)
-      } else {
-        res.json(result)
-      }
-
-    })
+    [parseInt(id)])
+    .then(response => res.json(response))
+    .catch(error => console.log(error))
 })
 
 // Get All
 
-app.get("/api/characters", async (req, res) => {
-  await db.query(
-    'select * from characters',
-    (err, result) => {
-
-      if (err) {
-        console.log(err)
-      } else {
-        res.json(result)
-      }
-
-    })
+app.get("/api/characters", (req, res) => {
+  db.query(
+    'select * from characters')
+    .then(response => res.json(response))
+    .catch(error => console.log(error))
 })
 
 //------------------
