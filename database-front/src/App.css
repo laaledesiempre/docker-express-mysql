@@ -1,0 +1,14 @@
+header {
+    display:flex;
+    justify-content: center;
+    gap: 2rem;
+    width: 100vw;
+    margin: 1rem auto 2rem;
+}
+header > * {
+    font-size: 2rem;
+    background-color: var(--white-cream);
+    border: 0.2rem solid var(--green-grey);
+    color: var(--blueish);
+    padding: 0.2rem;
+}
