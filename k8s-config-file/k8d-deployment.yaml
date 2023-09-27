@@ -1,0 +1,53 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment 
+  namespace: default
+  labels:
+    app: nginx  
+spec:
+  selector:
+    matchLabels:
+      app: nginx 
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx  
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name:  
+        image:  nginx:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort:  80
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx 
+  namespace: default
+spec:
+  selector:
+    app: nginx 
+  type: ClusterIP
+  ports:
+  - name: 
+    protocol: TCP
+    port: 80
+    targetPort: 5000
+    nodePort: 30001
+---
