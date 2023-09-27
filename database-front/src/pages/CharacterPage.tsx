@@ -16,7 +16,7 @@ export const CharacterPage = () => {
 
   // Get character request
   useEffect(() => {
-    axios.get('http://192.168.69.11:3000/api/character/id/' + param.character).then(
+    axios.get('http://express:3000/api/character/id/' + param.character).then(
       (response) => {
         setData(response.data[0][0])
       }, (error) => {

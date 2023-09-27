@@ -22,7 +22,7 @@ spec:
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name:  
-        image:  nginx:latest
+        image: laaledesiempre/docker-express-mysql:nginx
         imagePullPolicy: IfNotPresent
         resources:
           requests:
@@ -38,7 +38,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx 
+  name: nginx-service 
   namespace: default
 spec:
   selector:
