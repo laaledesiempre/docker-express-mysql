@@ -21,16 +21,16 @@ spec:
           # - Init containers always run to completion.
           # - Each init container must complete successfully before the next one starts.
       containers:
-      - name:  
+      - name: react  
         image: laaledesiempre/docker-express-mysql:react
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         resources:
           requests:
-            cpu: 100m
-            memory: 100Mi
+            cpu: 200m
+            memory: 500Mi
           limits:
-            cpu: 100m
-            memory: 100Mi
+            cpu: 200m
+            memory: 500Mi
         ports:
         - containerPort: 5173
 ---
@@ -38,16 +38,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-service 
+  name: react 
   namespace: default
 spec:
   selector:
     app: react 
-  type: ClusterIP
+  type: LoadBalancer
   ports:
   - name: 
     protocol: TCP
     port: 5173 
     targetPort: 5173 
 ---
-
+  

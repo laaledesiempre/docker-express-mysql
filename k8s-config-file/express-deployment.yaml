@@ -21,7 +21,7 @@ spec:
           # - Init containers always run to completion.
           # - Each init container must complete successfully before the next one starts.
       containers:
-      - name:  
+      - name: express 
         image: laaledesiempre/docker-express-mysql:express
         imagePullPolicy: IfNotPresent
         resources:
@@ -38,12 +38,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: express-service 
+  name: express 
   namespace: default
 spec:
   selector:
     app: express 
-  type: ClusterIP
+  type: LoadBalancer
   ports:
   - name: 
     protocol: TCP
