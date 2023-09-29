@@ -1,0 +1,64 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment 
+  namespace: default
+  labels:
+    app: mysql  
+spec:
+  selector:
+    matchLabels:
+      app: mysql 
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql  
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name: mysql 
+        image: mysql
+        env: 
+        - name: MYSQL_DATABASE
+          value: db 
+        - name: MYSQL_USER
+          value: user
+        - name: MYSQL_PASSWORD
+          value: password
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_ROOT_HOST
+          value: %
+        imagePullPolicy: Never
+        resources:
+          requests:
+            cpu: 200m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 200Mi
+        ports:
+        - containerPort: 3306
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service 
+  namespace: default
+spec:
+  selector:
+    app: mysql 
+  type: LoadBalancer
+  ports:
+  - name: 
+    protocol: TCP
+    port: 3306
+    targetPort: 3306
+---
+
