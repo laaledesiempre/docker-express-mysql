@@ -23,7 +23,7 @@ spec:
       containers:
       - name: nginx 
         image: laaledesiempre/docker-express-mysql:nginx
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         resources:
           requests:
             cpu: 200m

@@ -23,7 +23,7 @@ spec:
       containers:
       - name: express 
         image: laaledesiempre/docker-express-mysql:express
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         resources:
           requests:
             cpu: 100m

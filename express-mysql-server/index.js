@@ -15,7 +15,7 @@ app.use(express.json())
 // Data Base Conection
 
 const db = mysql.createPool({
-  host: "192.168.69.10",
+  host: "mysql",
   user: "root",
   password: "password",
   database: "db"
@@ -42,7 +42,7 @@ const defaultResponseDatabase = (err, result, res) => {
 
 //------------------
 //Endpoints
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   console.log("flag 1, endpoint impacted on base")
   if (!created) {
     console.log("flag 2, entered query");
@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
     created = true
   }
 })
-app.get("/test", (req, res) => {
+app.get("/api/test", (req, res) => {
   console.log("server tested")
   res.send("Hi from here")
 

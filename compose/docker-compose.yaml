@@ -1,6 +1,6 @@
 version: "3"
 services:
-  mysqldatabase:
+  mysql:
     image: mysql
     environment:
       - MYSQL_DATABASE=db
@@ -14,22 +14,24 @@ services:
     networks:
       databases:
         ipv4_address: 192.168.69.10
-  nodejsbackend:
+  express:
     build: ../express-mysql-server/
     depends_on:
-      - mysqldatabase
+      - mysql
     networks:
       databases:
         ipv4_address: 192.168.69.11
-  reactfrontend:
+  react:
     build: ../database-front/ 
     ports:
       - "5173:5173"
     networks:
       databases:
         ipv4_address: 192.168.69.12
-  nginxproxy:
+  nginx:
     build: ../nginx_server/
+    depends_on:
+      - express
     ports:
       - "3000:3000"
     networks:

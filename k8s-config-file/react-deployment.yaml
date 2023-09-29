@@ -23,7 +23,7 @@ spec:
       containers:
       - name: react  
         image: laaledesiempre/docker-express-mysql:react
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         resources:
           requests:
             cpu: 200m

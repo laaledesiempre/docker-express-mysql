@@ -8,7 +8,7 @@ export const Database = () => {
 
   // Characters request
   useEffect(() => {
-    axios.get("http://express:3000/api/characters").then(
+    axios.get("/api/characters").then(
       (response) => {
         setData(response.data[0])
       },
