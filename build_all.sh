@@ -1,4 +1,4 @@
-cd /home/datos/code/docker/mysql-express-react/
+
 cd ./database-front
 docker build . -t laaledesiempre/docker-express-mysql:react
 #pwd
